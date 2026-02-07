@@ -1,0 +1,457 @@
+/* Removendo todas as diretivas do Tailwind e convertendo para CSS puro */
+
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.35 0.15 160);
+  --card: oklch(0.98 0.01 160);
+  --card-foreground: oklch(0.45 0.05 220);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.35 0.15 160);
+  --primary: oklch(0.45 0.15 160);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.55 0.12 160);
+  --secondary-foreground: oklch(1 0 0);
+  --muted: oklch(0.98 0.01 160);
+  --muted-foreground: oklch(0.45 0.05 220);
+  --accent: oklch(0.55 0.12 160);
+  --accent-foreground: oklch(1 0 0);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(1 0 0);
+  --border: oklch(0.92 0.02 160);
+  --input: oklch(0.98 0.01 160);
+  --ring: oklch(0.45 0.15 160 / 0.3);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.145 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --popover: oklch(0.145 0 0);
+  --popover-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.55 0.12 160);
+  --primary-foreground: oklch(0.145 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.396 0.141 25.723);
+  --destructive-foreground: oklch(0.637 0.237 25.331);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+}
+
+/* Adicionando reset básico e estilos fundamentais */
+* {
+  box-sizing: border-box;
+  margin: 30;
+  padding: 30;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.6;
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+/* Implementando classes essenciais do Tailwind em CSS puro */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 2rem;
+}
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
+}
+.gap-4 {
+  gap: 1rem;
+}
+.gap-6 {
+  gap: 1.5rem;
+}
+
+.p-4 {
+  padding: 1rem;
+}
+.p-6 {
+  padding: 1.5rem;
+}
+.px-8 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+.px-2 {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.py-2 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+.py-1 {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+
+.w-full {
+  width: 100%;
+}
+.max-w-7xl {
+  max-width: 30rem;
+}
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+}
+.text-lg {
+  font-size: 1.125rem;
+}
+.text-sm {
+  font-size: 0.875rem;
+}
+.text-xs {
+  font-size: 0.75rem;
+}
+.font-bold {
+  font-weight: 700;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-medium {
+  font-weight: 500;
+}
+.text-center {
+  text-align: center;
+}
+
+.bg-card {
+  background-color: var(--card);
+}
+.bg-primary {
+  background-color: var(--primary);
+}
+.bg-red-50 {
+  background-color: #fef2f2;
+}
+.bg-red-100 {
+  background-color: #fee2e2;
+}
+.bg-green-50 {
+  background-color: #f0fdf4;
+}
+.bg-green-100 {
+  background-color: #dcfce7;
+}
+.bg-blue-50 {
+  background-color: #eff6ff;
+}
+.bg-blue-100 {
+  background-color: #dbeafe;
+}
+.text-card-foreground {
+  color: var(--card-foreground);
+}
+.text-primary-foreground {
+  color: var(--primary-foreground);
+}
+.text-red-500 {
+  color: #ef4444;
+}
+.text-red-600 {
+  color: #dc2626;
+}
+.text-blue-600 {
+  color: #2563eb;
+}
+.text-green-600 {
+  color: #16a34a;
+}
+.text-green-700 {
+  color: #15803d;
+}
+.text-muted-foreground {
+  color: var(--muted-foreground);
+}
+
+.border {
+  border: 1px solid var(--border);
+}
+.rounded-lg {
+  border-radius: var(--radius);
+}
+.rounded {
+  border-radius: 0.25rem;
+}
+.shadow-sm {
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+}
+
+.grid {
+  display: grid;
+}
+.grid-cols-1 {
+  grid-template-columns: 1fr;
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.md\:grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.md\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.md\:col-span-1 {
+  grid-column: span 1 / span 1;
+}
+.lg\:grid-cols-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.lg\:grid-cols-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+/* Estilos para formulários */
+input,
+select,
+textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--input);
+  color: var(--foreground);
+  font-size: 0.875rem;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+.space-y-2 > * + * {
+  margin-top: 0.5rem;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem;
+}
+
+.space-y-6 > * + * {
+  margin-top: 1.5rem;
+}
+
+/* Estilos para botões */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+.btn-primary:hover:not(:disabled) {
+  opacity: 0.9;
+}
+
+/* Estilos para tabelas */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  font-weight: 600;
+  background-color: var(--muted);
+  color: var(--muted-foreground);
+}
+
+/* Cores específicas para as tabelas de resultados */
+/* Cores para Resumo Passivo */
+.text-orange-600 {
+  color: #ea580c;
+}
+.text-blue-600 {
+  color: #2563eb;
+}
+.text-red-700 {
+  color: #b91c1c;
+}
+.text-red-600 {
+  color: #dc2626;
+}
+.bg-red-50 {
+  background-color: #fef2f2;
+}
+.border-red-200 {
+  border-color: #fecaca;
+}
+.border-red-600 {
+  border-color: #dc2626;
+}
+
+/* Cores para Situação */
+.border-orange-500 {
+  border-color: #f97316;
+}
+.bg-orange-50 {
+  background-color: #fff7ed;
+}
+.text-orange-800 {
+  color: #9a3412;
+}
+.text-orange-700 {
+  color: #c2410c;
+}
+.border-blue-500 {
+  border-color: #3b82f6;
+}
+.text-blue-800 {
+  color: #1e40af;
+}
+.text-blue-700 {
+  color: #1d4ed8;
+}
+
+/* Cores para badges e destaques */
+.bg-red-600 {
+  background-color: #dc2626;
+}
+.text-white {
+  color: #ffffff;
+}
+
+/* Bordas laterais para cards de situação */
+.border-l-4 {
+  border-left-width: 4px;
+}
+
+/* Bordas duplas para destaque */
+.border-2 {
+  border-width: 2px;
+}
+
+/* Cores de fundo com transparência */
+.bg-primary\/5 {
+  background-color: rgba(var(--primary), 0.05);
+}
+
+/* Cores adicionais para textos */
+.text-primary {
+  color: var(--primary);
+}
+
+/* Tamanhos de fonte adicionais */
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+}
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+/* Responsividade básica */
+@media (max-width: 768px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+  .container {
+    padding: 0 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .md\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .md\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
+}
+
+@media (min-width: 1024px) {
+  .lg\:grid-cols-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .lg\:grid-cols-4 {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Estilos utilitárias adicionais */
+.inline-block {
+  display: inline-block;
+}
+.break-words {
+  word-wrap: break-word;
+  word-break: break-word;
+}
