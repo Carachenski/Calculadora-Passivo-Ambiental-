@@ -46,6 +46,7 @@ export interface ResultadoCalculo {
   valorRecomposicao: number
   custoRecompor: number
   custoRecomposicaoTotal: number
+  custoTotalPassivo: number
   mudancas: Record<string, number>
   distribuicaoFinal: Record<string, ClasseUso>
 }
@@ -60,32 +61,33 @@ export function calcularReservaLegal(dadosGerais: DadosGerais, uso: Record<strin
   // Cálculo da área necessária de Reserva Legal
   const areaReservaLegal = areaTotal * (rvRequerida / 100)
 
-  // Compensação (baseada em 2008)
-  let compensacao = 0
-  let valorCompensacao = 0
-  let situacao2008 = ""
+  // Cálculo do Déficit Total Atual
+  const totalDeficit = Math.max(0, areaReservaLegal - rvAtual)
+  const deficit2008 = Math.max(0, areaReservaLegal - rv2008)
 
-  if (rv2008 < areaReservaLegal) {
-    compensacao = areaReservaLegal - rv2008
-    valorCompensacao = valorRemanescenteVegetacao * 1.5 * compensacao
-    situacao2008 = `Déficit em 2008: necessita compensar ${compensacao.toFixed(2)} ha.`
+  // Compensação: o que era deficit em 2008 e ainda é deficit hoje
+  const compensacao = Math.min(totalDeficit, deficit2008)
+  const valorCompensacao = valorRemanescenteVegetacao * 1.5 * compensacao
+
+  // Recomposição: o resto do deficit atual (o que foi desmatado após 2008)
+  const recomposicao = totalDeficit - compensacao
+
+  let situacao2008 = ""
+  if (compensacao > 0) {
+    situacao2008 = `Déficit remanescente de 2008: necessita compensar ${compensacao.toFixed(2)} ha.`
+  } else if (rv2008 < areaReservaLegal) {
+    situacao2008 = "Possuía déficit em 2008, mas está regularizado atualmente."
   } else {
     situacao2008 = "Em 2008 já possuía o mínimo exigido. Não há compensação."
   }
 
-  // Recomposição (situação atual)
-  let recomposicao = 0
   let situacaoAtual = ""
-
-  if (rvAtual < areaReservaLegal) {
-    recomposicao = areaReservaLegal - rvAtual
-    // Se já há compensação, reduzir da recomposição
-    if (compensacao > 0) {
-      recomposicao = Math.max(0, recomposicao - compensacao)
-    }
+  if (totalDeficit <= 0) {
+    situacaoAtual = "Atualmente possui o mínimo exigido. Não há passivo ambiental."
+  } else if (recomposicao > 0) {
     situacaoAtual = `Déficit atual: necessita recompor ${recomposicao.toFixed(2)} ha.`
   } else {
-    situacaoAtual = "Atualmente possui o mínimo exigido. Não há recomposição."
+    situacaoAtual = "Déficit atual pode ser totalmente compensado."
   }
 
   // Valor do imóvel antes da recomposição
@@ -120,6 +122,7 @@ export function calcularReservaLegal(dadosGerais: DadosGerais, uso: Record<strin
   const valorRecomposicao = valorAntes - valorDepois
   const custoRecompor = recomposicao * (1.5 * valorRemanescenteVegetacao)
   const custoRecomposicaoTotal = valorRecomposicao + custoRecompor
+  const custoTotalPassivo = custoRecomposicaoTotal + valorCompensacao
 
   return {
     areaReservaLegal,
@@ -134,6 +137,7 @@ export function calcularReservaLegal(dadosGerais: DadosGerais, uso: Record<strin
     valorRecomposicao,
     custoRecompor,
     custoRecomposicaoTotal,
+    custoTotalPassivo,
     mudancas,
     distribuicaoFinal: usoFinal,
   }

@@ -184,7 +184,7 @@ export function ReservaLegalForm() {
 
     pdf.setFont("helvetica", "bold")
     pdf.text(
-      `PASSIVO TOTAL: ${formatCurrency(results.valorCompensacao + results.custoRecomposicaoTotal)}`,
+      `PASSIVO TOTAL: ${formatCurrency(results.custoTotalPassivo)}`,
       margin,
       yPosition,
     )
@@ -491,7 +491,7 @@ export function ReservaLegalForm() {
 
                 <div className="mt-4 text-center p-4 border-2 rounded-lg bg-red-50 border-red-200">
                   <div className="text-3xl font-bold text-red-700 break-words">
-                    {formatCurrency(results.valorCompensacao + results.custoRecomposicaoTotal)}
+                    {formatCurrency(results.custoTotalPassivo)}
                   </div>
                   <div className="text-base text-red-600 font-medium">Passivo Total</div>
                 </div>
