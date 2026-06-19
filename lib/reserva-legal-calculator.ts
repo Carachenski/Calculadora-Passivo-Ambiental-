@@ -1,6 +1,6 @@
-// Ordem de prioridade para retirada de áreas na recomposição
+// Ordem de prioridade para retirada de áreas na recomposição.
+// "Outros" (estradas, rios, benfeitorias) NÃO entra: não é área convertível.
 const PRIORIDADE = [
-  "Outros",
   "Pastagem de Médio Suporte",
   "Silvicultura",
   "Pastagem de Alto Suporte",
